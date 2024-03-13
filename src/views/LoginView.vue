@@ -1,10 +1,19 @@
 <template>
   <div>
     <div>
-      <input type="text" v-model="account" />
+      <label for="account">ID : </label>
+      <input id="account" type="text" v-model="account" />
     </div>
     <div>
-      <input type="text" v-model="password" />
+      <label for="password">PW : </label>
+      <input id="password" type="password" v-model="password" />
+    </div>
+    <div>
+      <select v-model="company">
+        <option value="none" selected disabled>회사를 선택하세요</option>
+        <option value="company1">company1</option>
+        <option value="company2">company2</option>
+      </select>
     </div>
     <div>
       <button @click="loginClickHandler">로그인</button>
@@ -13,19 +22,22 @@
 </template>
 <script setup>
 import router from '@/router'
-import { useSocketStore } from '@/stores/socketStore'
-import { onMounted, ref } from 'vue'
+import { useUserStore } from '@/stores/userStore'
+import { ref } from 'vue'
 
 const account = ref('')
 const password = ref('')
-const socketStore = useSocketStore()
-
-onMounted(() => {
-  socketStore.socketInit()
-})
+const company = ref('none')
+const userStore = useUserStore()
 
 const loginClickHandler = () => {
-  router.push('/home')
+  /* if (account.value === '' || password.value === '' || company.value === 'none') {
+    alert('아이디와 비밀번호를 입력해주시고 회사를 선택해주세요.')
+    return
+  } */
+
+  router.push('/channel')
+  // router.push('/home')
 }
 </script>
 <style scoped></style>

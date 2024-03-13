@@ -8,10 +8,22 @@ export const useSocketStore = defineStore('counter', {
   }),
   actions: {
     socketInit() {
-      this.socket = io(VITE_SERVER_SOCKET_URL, { transports: ['websocket'] })
+      return new Promise((resolve, reject) => {
+        if (this.socket === null) {
+          this.socket = io(VITE_SERVER_SOCKET_URL, { transports: ['websocket'] })
 
-      this.socket.emit('connection', (callback) => {
-        console.log(callback)
+          this.socket.on('connect', () => {
+            console.log(`connected : ${this.socket.id}`)
+            resolve(this.socket)
+          })
+
+          this.socket.on('connect_error', (error) => {
+            console.log('connect_error : ', error)
+            reject(error)
+          })
+        } else {
+          resolve(this.socket)
+        }
       })
     },
     login() {
@@ -24,11 +36,11 @@ export const useSocketStore = defineStore('counter', {
       this.socket.emit('sendMessage', { id, message }, (callback) => {
         console.log(callback)
       })
-    }
-    /* message() {
-      this.socket.on('message', (message) => {
-        console.log('recieve : ', message)
+    },
+    joinRoom(room, userId) {
+      this.socket.emit('joinRoom', { room, userId: this.socket.id }, (callback) => {
+        console.log(callback)
       })
-    } */
+    }
   }
 })

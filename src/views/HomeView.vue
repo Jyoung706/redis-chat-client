@@ -1,16 +1,4 @@
-<template>
-  <div>socket connected</div>
-  <div><button @click="routingLogin">go to Login</button></div>
-
-  <div>채팅창</div>
-  <div>
-    <div v-for="chat in chattingList" :key="chat.id">{{ chat.id }} : {{ chat.message }}</div>
-  </div>
-  <div>
-    <input type="text" @keyup.enter="sendMessage" v-model="contents" />
-    <button id="chat" @click="sendMessage">전송</button>
-  </div>
-</template>
+<template></template>
 
 <script setup>
 import router from '@/router'

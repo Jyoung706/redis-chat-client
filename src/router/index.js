@@ -12,6 +12,16 @@ const router = createRouter({
       path: '/home',
       name: 'HomeView',
       component: () => import('@/views/HomeView.vue')
+    },
+    {
+      path: '/channel',
+      name: 'ChannelView',
+      component: () => import('@/views/ChannelView.vue')
+    },
+    {
+      path: '/chat/:channelId',
+      name: 'ChatView',
+      component: () => import('@/views/ChatView.vue')
     }
   ]
 })

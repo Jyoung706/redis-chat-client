@@ -18,7 +18,6 @@ const socketStore = useSocketStore()
 const room = ref(['채팅방1', '채팅방2', '채팅방3'])
 
 const routingChat = (index, roomInfo) => {
-  socketStore.joinRoom(roomInfo)
   router.push(`/chat/${index}`)
 }
 
