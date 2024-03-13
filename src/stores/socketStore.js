@@ -1,5 +1,6 @@
 import { io } from 'socket.io-client'
 import { defineStore } from 'pinia'
+const { VITE_SERVER_SOCKET_URL } = import.meta.env
 
 export const useSocketStore = defineStore('counter', {
   state: () => ({
@@ -7,7 +8,7 @@ export const useSocketStore = defineStore('counter', {
   }),
   actions: {
     socketInit() {
-      this.socket = io('http://localhost:8000', { transports: ['websocket'] })
+      this.socket = io(VITE_SERVER_SOCKET_URL, { transports: ['websocket'] })
 
       this.socket.emit('connection', (callback) => {
         console.log(callback)
