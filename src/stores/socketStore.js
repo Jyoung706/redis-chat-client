@@ -32,13 +32,18 @@ export const useSocketStore = defineStore('counter', {
         console.log(callback)
       })
     },
-    sendMessage(id, message) {
-      this.socket.emit('sendMessage', { id, message }, (callback) => {
+    sendMessage(roomId, id, message) {
+      this.socket.emit('sendMessage', { roomId, id, message }, (callback) => {
         console.log(callback)
       })
     },
     joinRoom(room, userId) {
       this.socket.emit('joinRoom', { room, userId: this.socket.id }, (callback) => {
+        console.log(callback)
+      })
+    },
+    leaveRoom(room, userId) {
+      this.socket.emit('leaveRoom', { room, userId: this.socket.id }, (callback) => {
         console.log(callback)
       })
     }

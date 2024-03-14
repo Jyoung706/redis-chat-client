@@ -16,6 +16,7 @@ import { useSocketStore } from '@/stores/socketStore'
 
 const socketStore = useSocketStore()
 const room = ref(['채팅방1', '채팅방2', '채팅방3'])
+const currentState = ref()
 
 const routingChat = (index, roomInfo) => {
   router.push(`/chat/${index}`)
@@ -23,7 +24,7 @@ const routingChat = (index, roomInfo) => {
 
 onMounted(async () => {
   await socketStore.socketInit()
-  socketStore.login()
+  const data = socketStore.login()
 })
 </script>
 <style scoped>
