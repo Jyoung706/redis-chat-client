@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import { onBeforeMount, onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import router from '@/router'
 import { useSocketStore } from '@/stores/socketStore'
 
@@ -19,13 +19,10 @@ const room = ref(['채팅방1', '채팅방2', '채팅방3'])
 const currentState = ref()
 
 const routingChat = (index, roomInfo) => {
-  router.push(`/chat/${index}`)
+  router.push(`/chat/${index + 1}`)
 }
 
-onMounted(async () => {
-  await socketStore.socketInit()
-  const data = socketStore.login()
-})
+onMounted(async () => {})
 </script>
 <style scoped>
 .chat_room {

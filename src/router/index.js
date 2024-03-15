@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useSocketStore } from '@/stores/socketStore'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -24,6 +25,17 @@ const router = createRouter({
       component: () => import('@/views/ChatView.vue')
     }
   ]
+})
+
+router.beforeEach(async (to, from, next) => {
+  const socketStore = useSocketStore()
+
+  if (!socketStore.socket && to.name !== 'LoginView') {
+    await socketStore.socketInit()
+    next()
+    return
+  }
+  next()
 })
 
 export default router

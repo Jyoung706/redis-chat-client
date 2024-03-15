@@ -22,13 +22,11 @@
 </template>
 <script setup>
 import router from '@/router'
-import { useUserStore } from '@/stores/userStore'
 import { ref } from 'vue'
 
 const account = ref('')
 const password = ref('')
 const company = ref('none')
-const userStore = useUserStore()
 
 const loginClickHandler = () => {
   /* if (account.value === '' || password.value === '' || company.value === 'none') {
@@ -36,8 +34,7 @@ const loginClickHandler = () => {
     return
   } */
 
-  router.push('/channel')
-  // router.push('/home')
+  router.push('/home')
 }
 </script>
 <style scoped></style>

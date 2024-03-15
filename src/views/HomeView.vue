@@ -3,7 +3,6 @@
 <script setup>
 import router from '@/router'
 import { onMounted, ref } from 'vue'
-import { useSocketStore } from '@/stores/socketStore'
 
 const socketStore = useSocketStore()
 

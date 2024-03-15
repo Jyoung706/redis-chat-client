@@ -25,6 +25,7 @@ const roomTitle = ref('')
 const socketStore = useSocketStore()
 
 const sendClickHandler = () => {
+  if (!contents.value) return
   socketStore.sendMessage(roomTitle.value, socketStore.socket.id, contents.value)
   chattingList.value.push({ id: socketStore.socket.id, message: contents.value })
   contents.value = ''
