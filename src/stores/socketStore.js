@@ -26,10 +26,11 @@ export const useSocketStore = defineStore('counter', {
         }
       })
     },
-    login() {
-      console.log(this.socket.id)
-      this.socket.emit('login', `${this.socket.id} connected`, (callback) => {
-        console.log(callback)
+    login(account) {
+      return new Promise((resolve, reject) => {
+        this.socket.emit('login', { account, socketId: this.socket.id }, (callback) => {
+          resolve(callback)
+        })
       })
     },
     sendMessage(roomId, id, message) {
@@ -37,14 +38,21 @@ export const useSocketStore = defineStore('counter', {
         console.log(callback)
       })
     },
-    joinRoom(room, userId) {
-      this.socket.emit('joinRoom', { room, userId: this.socket.id }, (callback) => {
+    joinRoom(form) {
+      this.socket.emit('joinRoom', form, (callback) => {
         console.log(callback)
       })
     },
     leaveRoom(room, userId) {
       this.socket.emit('leaveRoom', { room, userId: this.socket.id }, (callback) => {
         console.log(callback)
+      })
+    },
+    homeEnter(id) {
+      return new Promise((resolve, reject) => {
+        this.socket.emit('homeEnter', { userId: id }, (callback) => {
+          resolve(callback.message.chatRoom)
+        })
       })
     }
   }

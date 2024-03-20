@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useSocketStore } from '@/stores/socketStore'
+import { secureStorage } from '@/utils/secureStorage'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -29,6 +30,12 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   const socketStore = useSocketStore()
+
+  if (to.name === 'LoginView') {
+    secureStorage.clearItem()
+    next()
+    return
+  }
 
   if (!socketStore.socket && to.name !== 'LoginView') {
     await socketStore.socketInit()

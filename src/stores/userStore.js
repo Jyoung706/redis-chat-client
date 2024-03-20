@@ -1,3 +1,4 @@
+import { secureStorage } from '@/utils/secureStorage'
 import { defineStore } from 'pinia'
 
 export const useUserStore = defineStore('user', {
@@ -10,6 +11,13 @@ export const useUserStore = defineStore('user', {
     },
     getUser() {
       return this.user
+    },
+    setUserList(payload) {
+      this.userList = payload
     }
+  },
+  persist: {
+    key: 'u',
+    storage: secureStorage
   }
 })
